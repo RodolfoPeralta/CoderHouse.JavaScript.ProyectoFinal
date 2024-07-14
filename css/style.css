@@ -1,0 +1,84 @@
+@import url("https://fonts.cdnfonts.com/css/harry-potter");
+@import url("https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+ul a {
+  text-decoration: none;
+}
+
+html {
+  color: white;
+  background: linear-gradient(#111111, #313131);
+  font-family: "Onest", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+html h1 {
+  font-family: "Harry Potter", sans-serif;
+  font-size: 20vh;
+  text-align: center;
+  margin: 30px;
+}
+
+main section p {
+  text-align: center;
+  font-size: 25px;
+  margin: 10px;
+}
+main section h3 {
+  text-align: center;
+  font-size: 40px;
+  margin: 20px;
+}
+main section div.div-form {
+  background-color: #EEBA30;
+  margin: 0 550px;
+  color: #740001;
+  border-radius: 15px;
+  padding-bottom: 20px;
+}
+main section div.div-form form.formulario {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  flex-wrap: wrap;
+  align-content: space-around;
+}
+main section div.div-form form.formulario button {
+  margin-top: 10px;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 20px 10px;
+}
+footer div ul.a-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
+footer div ul.a-container li {
+  margin: 10px;
+}
+footer div ul.a-container li > a {
+  color: white;
+  font-size: 20px;
+}
+
+/*# sourceMappingURL=style.css.map */

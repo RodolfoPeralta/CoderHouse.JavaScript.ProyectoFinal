@@ -1,0 +1,23 @@
+footer {
+
+    @include flex-options(column, center, center, wrap);
+
+    margin: 20px 10px;
+
+    div ul.a-container {
+
+        @include flex-options(row, center, center, wrap);
+        align-items: center;
+
+        li {
+
+            margin: 10px;
+
+            > a {
+                color: white;
+                font-size: 20px;
+            }
+            
+        }
+    }
+}
