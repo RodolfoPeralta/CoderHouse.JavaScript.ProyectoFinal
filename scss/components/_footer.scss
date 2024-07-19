@@ -16,6 +16,10 @@ footer {
             > a {
                 color: white;
                 font-size: 20px;
+
+                &:hover {
+                    color: #EEBA30;
+                }
             }
             
         }

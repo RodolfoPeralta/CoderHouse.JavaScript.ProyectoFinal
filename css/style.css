@@ -80,5 +80,8 @@ footer div ul.a-container li > a {
   color: white;
   font-size: 20px;
 }
+footer div ul.a-container li > a:hover {
+  color: #EEBA30;
+}
 
 /*# sourceMappingURL=style.css.map */
