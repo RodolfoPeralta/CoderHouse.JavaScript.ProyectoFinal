@@ -1,5 +1,5 @@
 main {
-    section {
+    section#formSection {
 
         p {
             text-align: center;
@@ -7,13 +7,13 @@ main {
             margin: 10px;
         }
 
-        h3 {
-            text-align: center;
-            font-size: 40px;
-            margin: 20px;
-        }
-
         div.div-form {
+
+            h3 {
+                text-align: center;
+                font-size: 40px;
+                margin: 20px;
+            }
 
             background-color: #EEBA30;
             margin: 0 550px;
@@ -22,15 +22,81 @@ main {
             padding-bottom: 20px;
 
 
-            form.formulario {
+            form#formulario {
                 @include flex-options(column, center, start, wrap);
                 align-content: space-around;
 
                 button {
                     margin-top: 10px;
                 }
-
             }
+        }
+    }
+
+    section#triviaSection {
+        div {
+            h2#questionTitle {
+                margin: 30px;
+                font-size: 40px;
+            }
+        }
+
+        div#container {
+
+            @include flex-options(column, center, center, wrap);
+            
+            div#question {
+                margin: 20px;
+                font-size: 30px;
+            }
+
+            div.buttons {
+                div#optionA {
+                    button#buttonOptionA {
+                        margin: 20px;
+                        font-size: 20px;
+                        width: 1000px;
+                    }
+                }
+    
+                div#optionB {
+                    button#buttonOptionB {
+                        margin: 20px;
+                        font-size: 20px;
+                        width: 1000px;
+                    }
+                }
+    
+                div#optionC {
+                    button#buttonOptionC {
+                        margin: 20px;
+                        font-size: 20px;
+                        width: 1000px;
+                    }
+                }
+            }
+        }
+    }
+
+    section#final {
+        div.message {
+            @include flex-options(column, center, center, wrap);
+            div {
+                p#score {
+                    font-size: 60px;
+                    margin-bottom: 20px;
+                }
+            }
+
+            div {
+                p#paragraph {
+                    font-size: 30px;
+                    margin-bottom: 20px;
+                }
+            }
+        }
+        div#table {
+            
         }
     }
 }

@@ -20,22 +20,63 @@
 <body>
     <main>
         <h1>Harry Potter <br>trivia</h1>
-        <section>
+
+        <!-- Formulario de ingreso -->
+        <section id="formSection">
             <p>Trivia sobre Harry Potter.</p>
             <p>¡Pone a prueba tus conocimientos acerca de esta gran saga!</p>
 
             <div class="div-form">
                 <h3>Registrate</h3>
 
-                <form action="" class="formulario">
-                    <label for="">Nombre y Apellido:</label>
-                    <input type="text" placeholder="Nombre y Apellido">
+                <form action="" id="formulario">
+                    <label for="name">Nombre y Apellido:</label>
+                    <input id="name" type="text">
 
-                    <label for="">E-mail:</label>
-                    <input type="text" placeholder="E-mail">
+                    <label for="mail">E-mail:</label>
+                    <input id="mail" type="email">
 
-                    <button type="submit">Ingresar</button>
+                    <label for="age">Edad:</label>
+                    <input id="age" type="text">
+
+                    <button id="button-submit">Ingresar</button>
                 </form>
+            </div>
+        </section>
+
+        <!-- Trivia -->
+        <section id="triviaSection" class="hidden">
+            <div>
+                <h2 id="questionTitle"></h2>
+            </div>
+            <div id="container" class="container">
+                <div id="question"></div>
+                <div class="buttons">
+                    <div id="optionA">
+                        <button id="buttonOptionA" value="A"></button>
+                    </div>
+                    <div id="optionB">
+                        <button id="buttonOptionB" value="B"></button>
+                    </div>
+                    <div id="optionC">
+                        <button id="buttonOptionC" value="C"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fin del juego -->
+        <section id="final">
+            <div class="message">
+                <div>
+                    <p id="score"></p>
+                </div>
+                <div>
+                    <p id="paragraph"></p>
+                </div>
+            </div>
+            <div id="table">
+
             </div>
         </section>
 

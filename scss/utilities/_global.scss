@@ -25,11 +25,21 @@ html {
     
     h1 {
         font-family: 'Harry Potter', sans-serif;
-        font-size: 20vh;
+        font-size: 15vh;
         text-align: center;
         margin: 30px;
     }
-    
+}
 
+.error {
+    background-color: #e62e1b;
+    color: white;
+}
 
+.ok {
+    background-color: #5dd55d;
+}
+
+.hidden {
+    display: none;
 }

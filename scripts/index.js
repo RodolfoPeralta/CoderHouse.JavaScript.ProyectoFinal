@@ -1,15 +1,43 @@
-/* ---------------- VARIABLES GLOBALES ---------------- */
+/* -------------------- CLASSES -------------------- */
+
+class User {
+
+  // Members
+  name;
+  age;
+  mail;
+  answers;
+  score;
+
+  // Constructor
+  constructor(name, age, mail) {
+    this.name = name;
+    this.age = age;
+    this.mail = mail;
+    this.answers = [];
+    this.score = 0;
+  }
+}
+/* ------------------------------------------------ */
+
+/* ---------------- GLOBAL VARIABLES ---------------- */
+
+let index = 0;
+let score = 0;
+let user;
 
 const validOptions = ["A", "B", "C"];
 
 const questions = [
   {
-    question: "¿Cómo llaman los magos a las personas que no tienen ninguna habilidad mágica?",
+    question:
+      "¿Cómo llaman los magos a las personas que no tienen ninguna habilidad mágica?",
     options: ["Cheetos", "Pringles", "Muggles"],
     correctAnswer: "C",
   },
   {
-    question: "¿Cómo se llama la pequeña bola dorada que te hace ganar un partido de quidditch?",
+    question:
+      "¿Cómo se llama la pequeña bola dorada que te hace ganar un partido de quidditch?",
     options: ["Snitch", "Bladder", "Sprigg"],
     correctAnswer: "A",
   },
@@ -28,12 +56,14 @@ const questions = [
     correctAnswer: "B",
   },
   {
-    question: "¿Cómo se llama la criatura mágica que solo pueden ver quienes han presenciado la muerte?",
+    question:
+      "¿Cómo se llama la criatura mágica que solo pueden ver quienes han presenciado la muerte?",
     options: ["Thestral", "Manticora", "Hipogrifo"],
     correctAnswer: "A",
   },
   {
-    question: "¿Qué revista para magos dirige Xenophilius, el padre de Luna Lovegood?",
+    question:
+      "¿Qué revista para magos dirige Xenophilius, el padre de Luna Lovegood?",
     options: ["El profeta", "El quisquilloso", "El inquisidor"],
     correctAnswer: "B",
   },
@@ -43,7 +73,8 @@ const questions = [
     correctAnswer: "A",
   },
   {
-    question: "¿Quién envía a Harry de forma anónima la capa de invisibilidad de su padre en Navidad?",
+    question:
+      "¿Quién envía a Harry de forma anónima la capa de invisibilidad de su padre en Navidad?",
     options: ["Sirius Black", "Albus Dumbledore", "Severus Snape"],
     correctAnswer: "B",
   },
@@ -77,59 +108,83 @@ const questions = [
   },
 ];
 
+// Form, inputs and register button
+
+const form = document.getElementById("formulario");
+const username = document.getElementById("name");
+const age = document.getElementById("age");
+const mail = document.getElementById("mail");
+const submitButton = document.getElementById("button-submit");
+
+// Main sections from index.html
+
+const formSection = document.getElementById("formSection");
+const triviaSection = document.getElementById("triviaSection");
+
+// Nodes from trivia section
+
+const questionTitle = document.getElementById("questionTitle");
+const question = document.getElementById("question");
+const buttonA = document.getElementById("buttonOptionA");
+const buttonB = document.getElementById("buttonOptionB");
+const buttonC = document.getElementById("buttonOptionC");
+
+// Final section nodes
+
+const scoreParagraph = document.getElementById("score");
+const paragraph = document.getElementById("paragraph");
+
 /* ---------------------------------------------------- */
 
-/* --------------------- FUNCIONES --------------------- */
+/* --------------------- FUNCTIONS --------------------- */
 
-const ShowQuestion = function (question, j) {
+// Show a specific question to the user
 
-  let optionsString = "";
+function showQuestion(index) {
 
-  for (let i = 0; i < validOptions.length; i++) {
-    optionsString += "\n" + validOptions[i] + " | " + questions[j].options[i];
-  }
+  questionTitle.innerText = "Pregunta " + (index + 1);
 
-  return question + "\n" + optionsString;
+  question.innerText = questions[index].question;
+
+  buttonA.innerText = questions[index].options[0];
+  buttonB.innerText = questions[index].options[1];
+  buttonC.innerText = questions[index].options[2];
 };
 
-const CheckOptionSelected = function (option) {
+// Checks the answer and increase the score if is correct
 
-  if (option === null) {
-    alert("No es posible dejar vacío el campo...");
-    console.warn("No es posible dejar vacío el campo...");
-    return false;
-  }
-
-  if (option.length != 1) {
-    alert("Se ingresó más de un carácter como respuesta...");
-    console.warn("Se ingresó más de un carácter como respuesta...");
-    return false;
-  }
-
-  option = option.toUpperCase();
-
-  switch (option) {
-    case "A":
-    case "B":
-    case "C":
-      return true;
-    default:
-      alert("Se ingresó un carácter no válido como respuesta...");
-      console.warn("Se ingresó un carácter no válido como respuesta...");
-      return false;
-  }
-};
-
-function CheckAnswer(answer, j) {
-
-  answer = answer.toUpperCase();
-
-  if (answer == questions[j].correctAnswer) {
+function checkAnswer(answer, index) {
+  if (answer == questions[index].correctAnswer) {
     score++;
   }
 }
 
-const ShowFinalMessage = function (finalScore) {
+function showLastSection() {
+
+  scoreParagraph.innerText = `Tu puntaje fue de ${score}/12.`;
+  paragraph.innerText = showFinalMessage(score); 
+}
+
+function nextQuestion(e) {
+
+  checkAnswer(e, index);
+
+  index++;
+
+  if(index < questions.length) {
+    showQuestion(index);
+  }
+  else {
+    triviaSection.classList.add("hidden");
+    showLastSection();
+    user.score = score;
+    localStorage.setItem("user", JSON.stringify(user));
+  }
+}
+
+// Show a message depending the obtained score
+
+const showFinalMessage = function (finalScore) {
 
   if (finalScore >= 0 && finalScore <= 4) {
     return "Deberías leer los libros o ver las películas.";
@@ -146,32 +201,83 @@ const ShowFinalMessage = function (finalScore) {
 
 /* -------------------- MAIN -------------------- */
 
-let score = 0;
-let answer;
-let choice = false;
-let iteration = 1;
+let uname, uage, umail;
 
-do {
-  for (let i = 0; i < questions.length; i++) {
-    answer = prompt(ShowQuestion(questions[i].question, i));
-  
-    while (!CheckOptionSelected(answer)) {
-      answer = prompt(ShowQuestion(questions[i].question, i));
-    }
-  
-    CheckAnswer(answer, i);
+// Obtains and validates input user data
+
+username.addEventListener("change", (e) => {
+
+  if(e.target.value.length === 0) {
+    username.className = "error";
   }
-  
-  alert(`Tu puntaje fue de ${score}/12. ` + ShowFinalMessage(score));
-  console.log(`intento ${iteration} | Tu puntaje fue de ${score}/12. ` + ShowFinalMessage(score));
-  
-  choice = confirm("¿Volver a jugar?");
-
-  if(choice) {
-    iteration++;
-    score = 0;
+  else {
+    username.className = "ok";
   }
 
-} while(choice);
+  uname = e.target.value;
+
+});
+
+age.addEventListener("change", (e) => {
+
+  if(e.target.value < 0 || e.target.value > 100 || e.target.value.length == 0 || isNaN(e.target.value)) {
+    age.className = "error";
+  }
+  else {
+    age.className = "ok";
+  }
+
+  uage = e.target.value;
+});
+
+mail.addEventListener("change", (e) => {
+
+  if((e.target.value.length === 0) || !(e.target.value.includes("@"))) {
+    mail.className = "error";
+  }
+  else {
+    mail.className = "ok";
+  }
+
+  umail = e.target.value;
+
+});
+
+// Submit form event
+
+form.addEventListener("submit", (e) => {
+
+  // Prevents send the form and reload the page
+  e.preventDefault();
+
+  // Shows and hides sections
+
+  formSection.classList.add("hidden");
+  triviaSection.classList.remove("hidden");
+
+  // Creates a new user
+  user = new User(uname, uage, umail);
+
+  // Show question
+  showQuestion(index);
+
+});
+
+// Next question event
+
+buttonA.addEventListener("click", (e) => {
+  nextQuestion(e.target.value);
+  user.answers.push(e.target.value);
+});
+
+buttonB.addEventListener("click", (e) => {
+  nextQuestion(e.target.value);
+  user.answers.push(e.target.value);
+});
+
+buttonC.addEventListener("click", (e) => {
+  nextQuestion(e.target.value);
+  user.answers.push(e.target.value);
+});
 
 /* ---------------------------------------------- */

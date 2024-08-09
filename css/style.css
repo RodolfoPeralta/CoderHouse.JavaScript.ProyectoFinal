@@ -23,29 +23,42 @@ html {
 }
 html h1 {
   font-family: "Harry Potter", sans-serif;
-  font-size: 20vh;
+  font-size: 15vh;
   text-align: center;
   margin: 30px;
 }
 
-main section p {
+.error {
+  background-color: #e62e1b;
+  color: white;
+}
+
+.ok {
+  background-color: #5dd55d;
+}
+
+.hidden {
+  display: none;
+}
+
+main section#formSection p {
   text-align: center;
   font-size: 25px;
   margin: 10px;
 }
-main section h3 {
-  text-align: center;
-  font-size: 40px;
-  margin: 20px;
-}
-main section div.div-form {
+main section#formSection div.div-form {
   background-color: #EEBA30;
   margin: 0 550px;
   color: #740001;
   border-radius: 15px;
   padding-bottom: 20px;
 }
-main section div.div-form form.formulario {
+main section#formSection div.div-form h3 {
+  text-align: center;
+  font-size: 40px;
+  margin: 20px;
+}
+main section#formSection div.div-form form#formulario {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -53,10 +66,54 @@ main section div.div-form form.formulario {
   flex-wrap: wrap;
   align-content: space-around;
 }
-main section div.div-form form.formulario button {
+main section#formSection div.div-form form#formulario button {
   margin-top: 10px;
 }
-
+main section#triviaSection div h2#questionTitle {
+  margin: 30px;
+  font-size: 40px;
+}
+main section#triviaSection div#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+main section#triviaSection div#container div#question {
+  margin: 20px;
+  font-size: 30px;
+}
+main section#triviaSection div#container div.buttons div#optionA button#buttonOptionA {
+  margin: 20px;
+  font-size: 20px;
+  width: 1000px;
+}
+main section#triviaSection div#container div.buttons div#optionB button#buttonOptionB {
+  margin: 20px;
+  font-size: 20px;
+  width: 1000px;
+}
+main section#triviaSection div#container div.buttons div#optionC button#buttonOptionC {
+  margin: 20px;
+  font-size: 20px;
+  width: 1000px;
+}
+main section#final div.message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+main section#final div.message div p#score {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+main section#final div.message div p#paragraph {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
 footer {
   display: flex;
   flex-direction: column;
