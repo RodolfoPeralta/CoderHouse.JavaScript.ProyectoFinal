@@ -9,25 +9,35 @@ main {
 
         div.div-form {
 
+            background-color: #EEBA30;
+            margin: 0 650px;
+            color: #740001;
+            border-radius: 15px;
+            padding-bottom: 20px;
+
             h3 {
                 text-align: center;
                 font-size: 40px;
                 margin: 20px;
             }
 
-            background-color: #EEBA30;
-            margin: 0 550px;
-            color: #740001;
-            border-radius: 15px;
-            padding-bottom: 20px;
-
-
             form#formulario {
                 @include flex-options(column, center, start, wrap);
                 align-content: space-around;
 
+                label {
+                    font-weight: 500;
+                }
+
                 button {
+                    align-self: center;
                     margin-top: 10px;
+                    padding: 5px;
+
+                    &:hover {
+                        background-color: #740001;
+                        color: white;
+                    }
                 }
             }
         }
@@ -44,7 +54,7 @@ main {
         div#container {
 
             @include flex-options(column, center, center, wrap);
-            
+
             div#question {
                 margin: 20px;
                 font-size: 30px;
@@ -56,22 +66,43 @@ main {
                         margin: 20px;
                         font-size: 20px;
                         width: 1000px;
+                        border: 1px solid transparent;
+                        
+                        &:hover {
+                            background-color:#781f19;
+                            color: white;
+                            border: 1px solid #781f19;
+                        }
                     }
                 }
-    
+
                 div#optionB {
                     button#buttonOptionB {
                         margin: 20px;
                         font-size: 20px;
                         width: 1000px;
+                        border: 1px solid transparent;
+                        
+                        &:hover {
+                            background-color:#781f19;
+                            color: white;
+                            border: 1px solid #781f19;
+                        }
                     }
                 }
-    
+
                 div#optionC {
                     button#buttonOptionC {
                         margin: 20px;
                         font-size: 20px;
                         width: 1000px;
+                        border: 1px solid transparent;
+                        
+                        &:hover {
+                            background-color:#781f19;
+                            color: white;
+                            border: 1px solid #781f19;
+                        }
                     }
                 }
             }
@@ -81,6 +112,7 @@ main {
     section#final {
         div.message {
             @include flex-options(column, center, center, wrap);
+
             div {
                 p#score {
                     font-size: 60px;
@@ -95,8 +127,44 @@ main {
                 }
             }
         }
-        div#table {
-            
+    }
+
+    section#tableSection {
+        div {
+            h3 {
+                margin: 50px;
+                font-size: 40px;
+            }
+        }
+
+        div.t-container {
+            table#table {
+    
+                margin: 0 auto;
+                border-collapse: collapse;
+
+                table,
+                th,
+                td {
+                    border: 1px, solid, white;
+                    padding: 8px; 
+                    text-align: center; 
+                }
+            }
+        }
+
+        div.button {
+            text-align: center;
+            margin: 10px;
+
+            button {
+                padding: 5px;
+
+                &:hover {
+                    background-color:#740001;
+                    color: white;
+                }
+            }
         }
     }
 }

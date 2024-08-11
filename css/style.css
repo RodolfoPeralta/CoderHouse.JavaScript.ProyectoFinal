@@ -48,7 +48,7 @@ main section#formSection p {
 }
 main section#formSection div.div-form {
   background-color: #EEBA30;
-  margin: 0 550px;
+  margin: 0 650px;
   color: #740001;
   border-radius: 15px;
   padding-bottom: 20px;
@@ -66,8 +66,17 @@ main section#formSection div.div-form form#formulario {
   flex-wrap: wrap;
   align-content: space-around;
 }
+main section#formSection div.div-form form#formulario label {
+  font-weight: 500;
+}
 main section#formSection div.div-form form#formulario button {
+  align-self: center;
   margin-top: 10px;
+  padding: 5px;
+}
+main section#formSection div.div-form form#formulario button:hover {
+  background-color: #740001;
+  color: white;
 }
 main section#triviaSection div h2#questionTitle {
   margin: 30px;
@@ -88,16 +97,34 @@ main section#triviaSection div#container div.buttons div#optionA button#buttonOp
   margin: 20px;
   font-size: 20px;
   width: 1000px;
+  border: 1px solid transparent;
+}
+main section#triviaSection div#container div.buttons div#optionA button#buttonOptionA:hover {
+  background-color: #781f19;
+  color: white;
+  border: 1px solid #781f19;
 }
 main section#triviaSection div#container div.buttons div#optionB button#buttonOptionB {
   margin: 20px;
   font-size: 20px;
   width: 1000px;
+  border: 1px solid transparent;
+}
+main section#triviaSection div#container div.buttons div#optionB button#buttonOptionB:hover {
+  background-color: #781f19;
+  color: white;
+  border: 1px solid #781f19;
 }
 main section#triviaSection div#container div.buttons div#optionC button#buttonOptionC {
   margin: 20px;
   font-size: 20px;
   width: 1000px;
+  border: 1px solid transparent;
+}
+main section#triviaSection div#container div.buttons div#optionC button#buttonOptionC:hover {
+  background-color: #781f19;
+  color: white;
+  border: 1px solid #781f19;
 }
 main section#final div.message {
   display: flex;
@@ -114,6 +141,33 @@ main section#final div.message div p#paragraph {
   font-size: 30px;
   margin-bottom: 20px;
 }
+main section#tableSection div h3 {
+  margin: 50px;
+  font-size: 40px;
+}
+main section#tableSection div.t-container table#table {
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+main section#tableSection div.t-container table#table table,
+main section#tableSection div.t-container table#table th,
+main section#tableSection div.t-container table#table td {
+  border: 1px, solid, white;
+  padding: 8px;
+  text-align: center;
+}
+main section#tableSection div.button {
+  text-align: center;
+  margin: 10px;
+}
+main section#tableSection div.button button {
+  padding: 5px;
+}
+main section#tableSection div.button button:hover {
+  background-color: #740001;
+  color: white;
+}
+
 footer {
   display: flex;
   flex-direction: column;
