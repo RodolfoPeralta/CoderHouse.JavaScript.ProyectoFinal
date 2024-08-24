@@ -10,7 +10,8 @@ main {
         div.div-form {
 
             background-color: #EEBA30;
-            margin: 0 650px;
+            margin: 0 80vh;
+            margin-top: 60px;
             color: #740001;
             border-radius: 15px;
             padding-bottom: 20px;
@@ -18,7 +19,8 @@ main {
             h3 {
                 text-align: center;
                 font-size: 40px;
-                margin: 20px;
+                margin: 10px;
+                padding: 10px;
             }
 
             form#formulario {
@@ -33,10 +35,12 @@ main {
                     align-self: center;
                     margin-top: 10px;
                     padding: 5px;
+                    border: 0;
+                    background-color: #740001;
+                    color: white;
 
                     &:hover {
-                        background-color: #740001;
-                        color: white;
+                        cursor: pointer;
                     }
                 }
             }
@@ -67,12 +71,6 @@ main {
                         font-size: 20px;
                         width: 1000px;
                         border: 1px solid transparent;
-                        
-                        &:hover {
-                            background-color:#781f19;
-                            color: white;
-                            border: 1px solid #781f19;
-                        }
                     }
                 }
 
@@ -82,12 +80,6 @@ main {
                         font-size: 20px;
                         width: 1000px;
                         border: 1px solid transparent;
-                        
-                        &:hover {
-                            background-color:#781f19;
-                            color: white;
-                            border: 1px solid #781f19;
-                        }
                     }
                 }
 
@@ -97,14 +89,12 @@ main {
                         font-size: 20px;
                         width: 1000px;
                         border: 1px solid transparent;
-                        
-                        &:hover {
-                            background-color:#781f19;
-                            color: white;
-                            border: 1px solid #781f19;
-                        }
                     }
                 }
+            }
+
+            div#time {
+                font-size: 60px;
             }
         }
     }

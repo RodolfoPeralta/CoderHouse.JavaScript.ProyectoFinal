@@ -24,88 +24,11 @@ class User {
 
 let index = 0;
 let score = 0;
+let timer;
+let count;
 let user;
 let users = [];
-
-const questions = [
-  {
-    question:
-      "¿Cómo llaman los magos a las personas que no tienen ninguna habilidad mágica?",
-    options: ["Cheetos", "Pringles", "Muggles"],
-    correctAnswer: "C",
-  },
-  {
-    question:
-      "¿Cómo se llama la pequeña bola dorada que te hace ganar un partido de quidditch?",
-    options: ["Snitch", "Bladder", "Sprigg"],
-    correctAnswer: "A",
-  },
-  {
-    question: "¿Cómo murieron los padres de Harry Potter?",
-    options: [
-      "En un accidente de auto",
-      "Los mató Voldemort",
-      "Ahogados al naufragar su barco",
-    ],
-    correctAnswer: "B",
-  },
-  {
-    question: "¿Cómo se llama la lechuza de Harry?",
-    options: ["Hippy", "Hedwig", "Houdini"],
-    correctAnswer: "B",
-  },
-  {
-    question:
-      "¿Cómo se llama la criatura mágica que solo pueden ver quienes han presenciado la muerte?",
-    options: ["Thestral", "Manticora", "Hipogrifo"],
-    correctAnswer: "A",
-  },
-  {
-    question:
-      "¿Qué revista para magos dirige Xenophilius, el padre de Luna Lovegood?",
-    options: ["El profeta", "El quisquilloso", "El inquisidor"],
-    correctAnswer: "B",
-  },
-  {
-    question: "¿A qué casa de Hogwarts pertenece Luna Lovegood?",
-    options: ["Ravenclaw", "Gryffindor", "Slytherin"],
-    correctAnswer: "A",
-  },
-  {
-    question:
-      "¿Quién envía a Harry de forma anónima la capa de invisibilidad de su padre en Navidad?",
-    options: ["Sirius Black", "Albus Dumbledore", "Severus Snape"],
-    correctAnswer: "B",
-  },
-  {
-    question: "¿Cuál es el nombre completo de Nick Casi Decapitado?",
-    options: [
-      "Antonin Dolohov",
-      "Vincent Crabbe",
-      "Sir Nicholas de Mimsy-Porpington",
-    ],
-    correctAnswer: "C",
-  },
-  {
-    question: "¿Qué organización fundó Hermione en su cuarto año en Hogwarts?",
-    options: ["Peddo", "Magic", "Leviosa"],
-    correctAnswer: "A",
-  },
-  {
-    question: "¿Qué les pasó a los padres de Neville?",
-    options: [
-      "Murieron en la primera guerra magica",
-      "Fueron torturados mediante la maldición Cruciatus y luego enviados al Hospital de San Mungo",
-      "Son profesores en Hogwarts",
-    ],
-    correctAnswer: "B",
-  },
-  {
-    question: "¿Cómo se llama la madre de Voldemort?",
-    options: ["Margaret", "Sylvia", "Merope"],
-    correctAnswer: "C",
-  },
-];
+let questions = [];
 
 // Form and inputs nodes
 
@@ -126,6 +49,7 @@ const question = document.getElementById("question");
 const buttonA = document.getElementById("buttonOptionA");
 const buttonB = document.getElementById("buttonOptionB");
 const buttonC = document.getElementById("buttonOptionC");
+const time = document.getElementById("time");
 
 // Final section nodes
 
@@ -136,6 +60,7 @@ const table = document.getElementById("table");
 const final = document.getElementById("final");
 
 // Play again node
+
 const again = document.getElementById("again");
 
 /* ------------------------------------------------------------------------------------------------------ */
@@ -146,19 +71,20 @@ const again = document.getElementById("again");
 const retrieveUsers = function () {
   const retrieveUsers = JSON.parse(localStorage.getItem("users"));
 
-  if(retrieveUsers === null) {
+  if (retrieveUsers === null) {
     return [];
-  }
-  else {
+  } else {
     const users = [];
-    for(let i=0; i < retrieveUsers.length; i++) {
-      users.push(new User(
-        retrieveUsers[i].name, 
-        retrieveUsers[i].age, 
-        retrieveUsers[i].mail, 
-        retrieveUsers[i].answers, 
-        retrieveUsers[i].score
-      ));
+    for (let i = 0; i < retrieveUsers.length; i++) {
+      users.push(
+        new User(
+          retrieveUsers[i].name,
+          retrieveUsers[i].age,
+          retrieveUsers[i].mail,
+          retrieveUsers[i].answers,
+          retrieveUsers[i].score
+        )
+      );
     }
     return users;
   }
@@ -166,34 +92,63 @@ const retrieveUsers = function () {
 
 // Adds an user to local storage
 function addUser(user) {
-
-  // If the user exists in local storage, it is deleted and recreated with its new score 
-  users = users.filter((u) => (u.name !== user.name) && (u.age !== user.age) && (u.mail !== user.mail));
+  // If the user exists in local storage, it is deleted and recreated with its new score
+  users = users.filter(
+    (u) => u.name !== user.name && u.age !== user.age && u.mail !== user.mail
+  );
 
   users.push(user);
   usersJson = JSON.stringify(users);
   localStorage.setItem("users", usersJson);
 }
 
+// Updates question timer
+function updateTimer() {
+  count--;
+
+  if(count <= 0) {
+    user.answers.push("");
+    clearInterval(timer);
+    nextQuestion();
+  }
+  else {
+    time.innerText = count;
+  }
+}
+
 // Show a specific question to the user
-function showQuestion(index) {
+async function showQuestion(index) {
   questionTitle.innerText = "Pregunta " + (index + 1);
 
-  question.innerText = questions[index].question;
+  question.innerText = await questions[index].question;
 
-  buttonA.innerText = questions[index].options[0];
-  buttonB.innerText = questions[index].options[1];
-  buttonC.innerText = questions[index].options[2];
+  buttonA.innerText = await questions[index].options[0];
+  buttonB.innerText = await questions[index].options[1];
+  buttonC.innerText = await questions[index].options[2];
+
+  // Starts countdown timer
+
+  count = 5;
+  time.innerText = count;
+
+  // Cleans any old timer
+  if(timer) {
+    clearInterval(timer);
+  }
+
+  // Sets timer
+  timer = setInterval(updateTimer, 1000);
 }
 
 // Checks the answer and increase the score if is correct
-function checkAnswer(answers) {
-  for (let i = 0; i < questions.length; i++) {
-    if (answers[i] == questions[i].correctAnswer) {
-      score++;
-    }
+const checkAnswer = function (answer, index) {
+  if (answer == questions[index].correctAnswer) {
+    score++;
+    return true;
+  } else {
+    return false;
   }
-}
+};
 
 // Show a message depending the obtained score
 const showFinalMessage = function (finalScore) {
@@ -210,7 +165,6 @@ const showFinalMessage = function (finalScore) {
 
 // Shows user score and a final message
 function showLastSection() {
-  checkAnswer(user.answers);
   user.score = score;
 
   // Show final message
@@ -226,8 +180,8 @@ function showLastSection() {
   addUser(user);
 
   // Sort about user score. If score is the same, sort about name
-  users.sort((a,b) => {
-    if(b.score === a.score) {
+  users.sort((a, b) => {
+    if (b.score === a.score) {
       return a.name.localeCompare(b.name);
     }
     return b.score - a.score;
@@ -235,7 +189,7 @@ function showLastSection() {
 
   // Add retrieve users in a table
 
-  table.innerHTML = '';
+  table.innerHTML = "";
   let trHeader = document.createElement("tr");
   trHeader.innerHTML = `<th>Nombre</th>
                         <th>Edad</th>
@@ -264,6 +218,21 @@ function nextQuestion(e) {
   }
 }
 
+// Retrieves fetchs questions from json file
+async function retrieveQuestions() {
+  try {
+    const url = "./questions.json";
+    const questionJson = await fetch(url);
+    questions = await questionJson.json();
+  } catch (error) {
+    Swal.fire({
+      title: "Error cargando la trivia",
+      text: "En estos momentos la trivia no está disponible.",
+      icon: "error",
+    });
+  }
+}
+
 /* ----------------------------------------------------------------------------------------------- */
 
 /* ------------------------------------------ MAIN ------------------------------------------ */
@@ -273,10 +242,13 @@ let uname, uage, umail;
 // Retrieves old users saved on local storage
 users = retrieveUsers();
 
+// Retrieves trivia questions
+retrieveQuestions();
+
 // Obtains and validates input user data
 
 username.addEventListener("change", (e) => {
-  if (e.target.value.length === 0) {
+  if (e.target.value.length === 0 || e.target.value == undefined) {
     username.className = "error";
   } else {
     username.className = "ok";
@@ -286,7 +258,7 @@ username.addEventListener("change", (e) => {
 });
 
 age.addEventListener("change", (e) => {
-  if (e.target.value < 0 || e.target.value > 100 || e.target.value.length == 0 || isNaN(e.target.value)) {
+  if (e.target.value < 0 || e.target.value > 100 || e.target.value.length == 0 || isNaN(e.target.value) || e.target.value == undefined) {
     age.className = "error";
   } else {
     age.className = "ok";
@@ -296,7 +268,7 @@ age.addEventListener("change", (e) => {
 });
 
 mail.addEventListener("change", (e) => {
-  if (e.target.value.length === 0 || !e.target.value.includes("@")) {
+  if (e.target.value.length === 0 || !e.target.value.includes("@") || e.target.value == undefined) {
     mail.className = "error";
   } else {
     mail.className = "ok";
@@ -315,34 +287,95 @@ form.addEventListener("submit", (e) => {
   formSection.classList.add("hidden");
   triviaSection.classList.remove("hidden");
 
-  // Create a new user
-  user = new User(uname, uage, umail);
+  // Checks input user data
+  if (uname != undefined && uage != undefined && umail != undefined) {
+    // Create a new user
+    user = new User(uname, uage, umail);
 
-  // Show question
-  showQuestion(index);
+    // Show question
+    showQuestion(index);
+  } 
+  else {
+    Swal.fire({
+      title: "Datos de usuario no válidos",
+      text: "Existen campos vacios que debes completar.",
+      icon: "error",
+    });
+
+    // Show and hide sections
+    formSection.classList.remove("hidden");
+    triviaSection.classList.add("hidden");
+  }
 });
 
 // Next question event
 
 buttonA.addEventListener("click", (e) => {
+
+  clearInterval(timer);
+
   user.answers.push(e.target.value);
-  nextQuestion(e.target.value);
+
+  // Checks user answer and show if it was correct or not
+  if (checkAnswer(e.target.value, index)) {
+    buttonA.classList.add("correctAnswer");
+  } else {
+    buttonA.classList.add("incorrectAnswer");
+  }
+
+  // Timeout that enables see the user answer on screen
+  setTimeout(() => {
+    buttonA.classList.remove("correctAnswer");
+    buttonA.classList.remove("incorrectAnswer");
+    nextQuestion(e.target.value);
+  }, 1000);
 });
 
 buttonB.addEventListener("click", (e) => {
+
+  clearInterval(timer);
+
   user.answers.push(e.target.value);
-  nextQuestion(e.target.value);
+
+  // Checks user answer and show if it was correct or not
+  if (checkAnswer(e.target.value, index)) {
+    buttonB.classList.add("correctAnswer");
+  } else {
+    buttonB.classList.add("incorrectAnswer");
+  }
+
+  // Timeout that enables see the user answer on screen
+  setTimeout(() => {
+    buttonB.classList.remove("correctAnswer");
+    buttonB.classList.remove("incorrectAnswer");
+    nextQuestion(e.target.value);
+  }, 1000);
 });
 
 buttonC.addEventListener("click", (e) => {
+
+  clearInterval(timer);
+
   user.answers.push(e.target.value);
-  nextQuestion(e.target.value);
+
+  // Checks user answer and show if it was correct or not
+  if (checkAnswer(e.target.value, index)) {
+    buttonC.classList.add("correctAnswer");
+  } else {
+    buttonC.classList.add("incorrectAnswer");
+  }
+
+  // Timeout that enables see the user answer on screen
+  setTimeout(() => {
+    buttonC.classList.remove("correctAnswer");
+    buttonC.classList.remove("incorrectAnswer");
+    nextQuestion(e.target.value);
+  }, 1000);
 });
 
 // Play again event
 
 again.addEventListener("click", (e) => {
-
   // Reset variables
   index = 0;
   score = 0;
@@ -355,7 +388,6 @@ again.addEventListener("click", (e) => {
 
   // Show question
   showQuestion(index);
-
 });
 
 /* ------------------------------------------------------------------------------------------ */

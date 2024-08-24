@@ -1,0 +1,79 @@
+[
+    {
+      "question":
+        "¿Cómo llaman los magos a las personas que no tienen ninguna habilidad mágica?",
+      "options": ["Cheetos", "Pringles", "Muggles"],
+      "correctAnswer": "C"
+    },
+    {
+      "question":
+        "¿Cómo se llama la pequeña bola dorada que te hace ganar un partido de quidditch?",
+      "options": ["Snitch", "Bladder", "Sprigg"],
+      "correctAnswer": "A"
+    },
+    {
+      "question": "¿Cómo murieron los padres de Harry Potter?",
+      "options": [
+        "En un accidente de auto",
+        "Los mató Voldemort",
+        "Ahogados al naufragar su barco"
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "question": "¿Cómo se llama la lechuza de Harry?",
+      "options": ["Hippy", "Hedwig", "Houdini"],
+      "correctAnswer": "B"
+    },
+    {
+      "question":
+        "¿Cómo se llama la criatura mágica que solo pueden ver quienes han presenciado la muerte?",
+      "options": ["Thestral", "Manticora", "Hipogrifo"],
+      "correctAnswer": "A"
+    },
+    {
+      "question":
+        "¿Qué revista para magos dirige Xenophilius, el padre de Luna Lovegood?",
+      "options": ["El profeta", "El quisquilloso", "El inquisidor"],
+      "correctAnswer": "B"
+    },
+    {
+      "question": "¿A qué casa de Hogwarts pertenece Luna Lovegood?",
+      "options": ["Ravenclaw", "Gryffindor", "Slytherin"],
+      "correctAnswer": "A"
+    },
+    {
+      "question":
+        "¿Quién envía a Harry de forma anónima la capa de invisibilidad de su padre en Navidad?",
+      "options": ["Sirius Black", "Albus Dumbledore", "Severus Snape"],
+      "correctAnswer": "B"
+    },
+    {
+      "question": "¿Cuál es el nombre completo de Nick Casi Decapitado?",
+      "options": [
+        "Antonin Dolohov",
+        "Vincent Crabbe",
+        "Sir Nicholas de Mimsy-Porpington"
+      ],
+      "correctAnswer": "C"
+    },
+    {
+      "question": "¿Qué organización fundó Hermione en su cuarto año en Hogwarts?",
+      "options": ["Peddo", "Magic", "Leviosa"],
+      "correctAnswer": "A"
+    },
+    {
+      "question": "¿Qué les pasó a los padres de Neville?",
+      "options": [
+        "Murieron en la primera guerra magica",
+        "Fueron torturados mediante la maldición Cruciatus y luego enviados al Hospital de San Mungo",
+        "Son profesores en Hogwarts"
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "question": "¿Cómo se llama la madre de Voldemort?",
+      "options": ["Margaret", "Sylvia", "Merope"],
+      "correctAnswer": "C"
+    }
+  ]
